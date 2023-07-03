@@ -1,5 +1,5 @@
 import React from "react";
-// import url from "../constants";
+import url from "../constants";
 
 function QuestionItem({ question, onDeleteClick }) {
   const { id, prompt, answers, correctIndex } = question;
@@ -10,15 +10,26 @@ function QuestionItem({ question, onDeleteClick }) {
     </option>
   ));
 
+  const handleAnswerChange = async (selection ,id) => {
+    console.log(selection)
+    // const config = {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   correctIndex: integer
+    // }
+    // const response = await fetch(`${url.questions}/${id}`)
+  }
+
+
   return (
     <li>
       <h4>Question {id}</h4>
       <h5>Prompt: {prompt}</h5>
       <label>
         Correct Answer:
-        <select defaultValue={correctIndex}>{options}</select>
+        <select onChange={(e, id) => handleAnswerChange(e.target.value, id)} defaultValue={correctIndex}>{options}</select>
       </label>
-      <button onClick={()=>onDeleteClick(id)}>Delete Question</button>
+      <button onClick={() => onDeleteClick(id)}>Delete Question</button>
     </li>
   );
 }
